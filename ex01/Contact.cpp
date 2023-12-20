@@ -22,6 +22,7 @@ void Contact::shortPrint(int index)
 	printAttribute(lastName);
 	std::cout << "|";
 	printAttribute(nickName);
+	std::cout << "|";
 }
 
 void Contact::longPrint(void)

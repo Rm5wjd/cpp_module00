@@ -15,7 +15,6 @@ class PhoneBook {
 		void input_field(std::string &field, const std::string &prompt);
 		void add();
 		void search();
-		void exit();
 };
 
 #endif

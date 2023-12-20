@@ -1,5 +1,4 @@
 #include <iostream>
-#include <locale>
 
 int main(int argc, char *argv[])
 {

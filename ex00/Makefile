@@ -2,24 +2,20 @@ CC = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 NAME = megaphone
-SRCS = $(notdir $(wildcard *.cpp))
+SRCS = megaphone.cpp
 OBJS = $(SRCS:.cpp=.o)
-OBJECTS = $(patsubst %.o, %.o, $(OBJS))
 
-DEPS = $(OBJECTS:.o=.d)
 
 all : $(NAME)
 
-$(NAME) : $(OBJECTS)
-	$(CC) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
+$(NAME) : $(OBJS)
+	$(CC) $(CXXFLAGS) $^ -o $@
 
-$(OBJ_DIR)/%.o : $(SRC_DIR)/%.cc
-	$(CC) $(CXXFLAGS) $(INCLUDE) -c $< -o $@ -MD $(LDFLAGS)
-
-.PHONY: clean all
+%.o : %.cpp
+	$(CC) $(CXXFLAGS) -c $< -o $@
 
 clean :
-	rm -f $(OBJECTS) $(DEPS)
+	rm -f $(OBJS)
 
 fclean :
 	make clean
@@ -29,4 +25,4 @@ re :
 	make fclean
 	make all
 
--include $(DEPS)
+.PHONY: clean all fclean re

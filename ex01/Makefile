@@ -2,22 +2,20 @@ CC = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 NAME = phonebook
-SRCS = $(notdir $(wildcard *.cpp))
+SRCS = Contact.cpp main.cpp PhoneBook.cpp
 OBJS = $(SRCS:.cpp=.o)
-OBJECTS = $(patsubst %.o, %.o, $(OBJS))
+
 
 all : $(NAME)
 
-$(NAME) : $(OBJECTS)
+$(NAME) : $(OBJS)
 	$(CC) $(CXXFLAGS) $^ -o $@
 
-$(OBJ_DIR)/%.o : $(SRC_DIR)/%.cc
-	$(CC) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
-
-.PHONY: clean all
+%.o : %.cpp
+	$(CC) $(CXXFLAGS) -c $< -o $@ -I.
 
 clean :
-	rm -f $(OBJECTS)
+	rm -f $(OBJS)
 
 fclean :
 	make clean
@@ -26,3 +24,5 @@ fclean :
 re : 
 	make fclean
 	make all
+
+.PHONY: clean all fclean re
